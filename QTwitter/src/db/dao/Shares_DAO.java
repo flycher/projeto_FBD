@@ -32,6 +32,7 @@ public class Shares_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Add Share Error -> " + e.getMessage());
+        	System.out.println("You already shared this post!");
 
         }
 
@@ -58,6 +59,7 @@ public class Shares_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Remove Share Error -> " + e.getMessage());
+        	System.out.println("You didn't shared this post!");
 
         }
     }

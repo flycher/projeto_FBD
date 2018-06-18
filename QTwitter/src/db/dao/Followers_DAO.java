@@ -88,6 +88,7 @@ public class Followers_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Start Following Error -> " + e.getMessage());
+        	System.out.println("You already follow this user!");
 
         }
 
@@ -114,6 +115,7 @@ public class Followers_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Stop Following Error -> " + e.getMessage());
+        	System.out.println("You don't follow this user!");
 
         }
 

@@ -34,157 +34,168 @@ public class Post {
 
         ResultSet rs = post.getPosts(usuario.getUserId());
 
-        int option, row = 0, total_rows = -1;
+        try {
+            if (rs.next()) {
 
-        boolean running = true;
+                int option, row = 0, total_rows = -1;
 
-        Date date = null;
+                boolean running = true;
 
-        Timestamp timestamp = null;
+                Date date = null;
 
-        String message = null;
+                Timestamp timestamp = null;
 
-        String op = null;
+                String message = null;
 
-        int postID = -1;
+                String op = null;
 
-        while (running) {
+                int postID = -1;
 
-            try {
+                while (running) {
 
-                if (rs.next()) {
-
-                    try {
-
-                        message = rs.getString("message");
-                        op = rs.getString("username");
-                        postID = rs.getInt("postID");
-                        timestamp = rs.getTimestamp("horario");
-                        total_rows = rs.getInt("total_rows");
-
-                    } catch (SQLException e) {
-
-                        //System.out.println("Error getting data from message on timeline -> " + e.getMessage());
-
-                    }
-
-                    date = new java.util.Date(timestamp.getTime());
-
-                }
-
-            } catch (SQLException e) {
-
-                //System.out.println("Error getting post -> " + e.getMessage());
-
-            }
-
-            System.out.println(message);
-            System.out.println("Post by: " + op + " on " + date);
-            System.out.println("Shares: " + Shares.getShares(postID));
-            System.out.println("Likes: " + Likes.getLikes(postID));
-            System.out.println("[1] - Go top. | [2] - Go bottom. | [3] - Previows Post | [4] - Next Post | " +
-                "[5] - Update Post | [6] - Delete Post | [7] - Back");
-            System.out.print("> ");
-
-            try {
-                option = scan.nextInt();
-            } catch (Exception e) {
-                scan.nextLine();
-                continue;
-            }
-
-            switch (option) {
-
-                case 1:
-                    try {
-
-                        rs.first();
-
-                    } catch (SQLException e) {
-
-                        //System.out.println("Error getting first row on post -> " + e.getMessage());
-
-                    }
-                    break;
-
-                case 2:
-                    try {
-
-                        rs.last();
-
-                    } catch (SQLException e) {
-
-                        //System.out.println("Error getting last row on post -> " + e.getMessage());
-
-                    }
-                    break;
-
-                case 3:
-                    try {
-
-                        if (rs.previous())
-                            if (row > 0)
-                                rs.absolute(--row);
-
-                    } catch (SQLException e) {
-
-                        //System.out.println("Error getting previous row on post -> " + e.getMessage());
-
-                    }
-                    break;
-
-                case 4:
                     try {
 
                         if (rs.next()) {
-                            if (row < total_rows)
-                                rs.absolute(++row);
+
+                            try {
+
+                                message = rs.getString("message");
+                                op = rs.getString("username");
+                                postID = rs.getInt("postID");
+                                timestamp = rs.getTimestamp("horario");
+                                total_rows = rs.getInt("total_rows");
+
+                            } catch (SQLException e) {
+
+                                //System.out.println("Error getting data from message on timeline -> " + e.getMessage());
+
+                            }
+
+                            date = new java.util.Date(timestamp.getTime());
 
                         }
+
                     } catch (SQLException e) {
 
-                        //System.out.println("Error getting next row on post -> " + e.getMessage());
+                        //System.out.println("Error getting post -> " + e.getMessage());
 
                     }
-                    break;
 
-                case 5:
-                    System.out.println("Limit your message to 280 characters.");
+                    System.out.println(message);
+                    System.out.println("Post by: " + op + " on " + date);
+                    System.out.println("Shares: " + Shares.getShares(postID));
+                    System.out.println("Likes: " + Likes.getLikes(postID));
+                    System.out.println("[1] - Go top. | [2] - Go bottom. | [3] - Previows Post | [4] - Next Post | " +
+                        "[5] - Update Post | [6] - Delete Post | [7] - Back");
                     System.out.print("> ");
-                    scan.nextLine();
-                    message = scan.nextLine();
-                    post.alterPost(postID, message);
+
                     try {
+                        option = scan.nextInt();
+                    } catch (Exception e) {
+                        scan.nextLine();
+                        continue;
+                    }
 
-                        rs.absolute(row);
+                    switch (option) {
 
-                    } catch (SQLException e) {
+                        case 1:
+                            try {
 
-                        //System.out.println("Error staying in row on post -> " + e.getMessage());
+                                rs.first();
+
+                            } catch (SQLException e) {
+
+                                //System.out.println("Error getting first row on post -> " + e.getMessage());
+
+                            }
+                            break;
+
+                        case 2:
+                            try {
+
+                                rs.last();
+
+                            } catch (SQLException e) {
+
+                                //System.out.println("Error getting last row on post -> " + e.getMessage());
+
+                            }
+                            break;
+
+                        case 3:
+                            try {
+
+                                if (rs.previous())
+                                    if (row > 0)
+                                        rs.absolute(--row);
+
+                            } catch (SQLException e) {
+
+                                //System.out.println("Error getting previous row on post -> " + e.getMessage());
+
+                            }
+                            break;
+
+                        case 4:
+                            try {
+
+                                if (rs.next()) {
+                                    if (row < total_rows)
+                                        rs.absolute(++row);
+
+                                }
+                            } catch (SQLException e) {
+
+                                //System.out.println("Error getting next row on post -> " + e.getMessage());
+
+                            }
+                            break;
+
+                        case 5:
+                            System.out.println("Limit your message to 280 characters.");
+                            System.out.print("> ");
+                            scan.nextLine();
+                            message = scan.nextLine();
+                            post.alterPost(postID, message);
+                            try {
+
+                                rs.absolute(row);
+
+                            } catch (SQLException e) {
+
+                                //System.out.println("Error staying in row on post -> " + e.getMessage());
+
+                            }
+                            break;
+
+                        case 6:
+                            System.out.println("Are you sure you want to remove this post?");
+                            System.out.println("[1]Yes [2]No\nThis cant be undone!");
+                            int del = scan.nextInt();
+                            if (del == 1) {
+                                Post.removePost(postID);
+                                System.out.println("Post " + postID + " deleted.");
+                            }
+                            break;
+
+                        case 7:
+                            running = false;
+                            break;
+
+                        default:
+                            break;
 
                     }
-                    break;
+                }
 
-                case 6:
-                    System.out.println("Are you sure you want to remove this post?");
-                    System.out.println("[1]Yes [2]No\nThis cant be undone!");
-                    int del = scan.nextInt();
-                    if (del == 1) {
-                        Post.removePost(postID);
-                        System.out.println("Post " + postID + " deleted.");
-                    }
-                    break;
+            } else
+                System.out.println("You dont have any posts yet.");
 
-                case 7:
-                    running = false;
-                    break;
+        } catch (SQLException e) {
 
-                default:
-                    break;
-
-            }
+            //System.out.println("Error getting posts -> " + e.getMessage());
+            
         }
-
     }
 
 }

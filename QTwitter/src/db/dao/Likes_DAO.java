@@ -32,6 +32,7 @@ public class Likes_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Add Like Error -> " + e.getMessage());
+        	System.out.println("You already liked this post!");
 
         }
 
@@ -58,6 +59,7 @@ public class Likes_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Remove Like Error -> " + e.getMessage());
+        	System.out.println("You didn't liked this post!");
 
         }
     }

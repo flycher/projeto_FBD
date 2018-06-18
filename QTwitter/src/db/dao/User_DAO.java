@@ -38,6 +38,7 @@ public class User_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Get User Error -> " + e.getMessage());
+        	System.out.println("User doesn't exists!");
 
         }
         return userId;
@@ -66,6 +67,7 @@ public class User_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Get User Error -> " + e.getMessage());
+        	System.out.println("User doesn't exists!");
 
         }
         return null;
@@ -93,6 +95,7 @@ public class User_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Add User Error -> " + e.getMessage());
+        	System.out.println("Username or email already linked to an account.Try a different username or email!");
 
         }
 
@@ -158,6 +161,7 @@ public class User_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Remove User Error -> " + e.getMessage());
+        	System.out.println("User doesn't exists!");
 
         }
     }
@@ -186,6 +190,7 @@ public class User_DAO {
         } catch (SQLException e) {
 
             //System.out.println("Alter User Error -> " + e.getMessage());
+        	System.out.println("User doesn't exists!");
 
         }
 
