@@ -3,5 +3,4 @@
 QTwitter
 
 Equipe:
-  Emanuelle Torres
-  Matheus Xavier
+  Emanuelle Torres | Matheus Xavier
