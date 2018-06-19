@@ -67,7 +67,7 @@ public class Post {
 
                             } catch (SQLException e) {
 
-                                //System.out.println("Error getting data from message on timeline -> " + e.getMessage());
+                                //System.out.println("Error getting data from message on post -> " + e.getMessage());
 
                             }
 
@@ -101,7 +101,8 @@ public class Post {
                         case 1:
                             try {
 
-                                rs.first();
+                            	rs.absolute(0);
+			                    row = 0;
 
                             } catch (SQLException e) {
 
@@ -113,7 +114,8 @@ public class Post {
                         case 2:
                             try {
 
-                                rs.last();
+                            	rs.absolute(total_rows - 1);
+			                    row = total_rows - 1;
 
                             } catch (SQLException e) {
 

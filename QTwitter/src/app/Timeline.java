@@ -48,10 +48,10 @@ public class Timeline {
 			                    postID = rs.getInt("postID");
 			                    timestamp = rs.getTimestamp("horario");
 			                    total_rows = rs.getInt("total_rows");
-
+			                    
 			                } catch (SQLException e) {
 
-			                    System.out.println("Error getting data from message on timeline -> " + e.getMessage());
+			                    //System.out.println("Error getting data from message on timeline -> " + e.getMessage());
 
 			                }
 
@@ -61,7 +61,7 @@ public class Timeline {
 
 			        } catch (SQLException e) {
 
-			            System.out.println("Error getting post -> " + e.getMessage());
+			            //System.out.println("Error getting post -> " + e.getMessage());
 
 			        }
 
